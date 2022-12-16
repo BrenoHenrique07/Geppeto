@@ -13,19 +13,20 @@
 </head>
 <body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
-	
-	<main class="m-5 p-4">
-		<h2 class="text-white">Cadastrar</h2>
+	<main class="container align-center my-5 text-white">
+		<h2>Cadastrar</h2>
 		<form th:action="@{/atividades/cadastrar}" method="post" th:object="${atividade}">
-			<div class="form-group">
-				<label for="nome" class="text-white">Nome</label>
-				<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome da atividade">
+			<div class="mb-3">
+				<label for="nome" class="form-label">Nome</label>
+				<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina" th:errorclass="is-invalid">
+				<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '">Erro</span>
 			</div>
-			<div class="form-group">
-				<label for="descricao" class="text-white">Descrição</label>
-				<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descricao da atividade">
+			<div class="mb-3">
+				<label for="descricao" class="form-label">Descrição</label>
+				<textarea class="form-control" th:field="*{descricao}" placeholder="Digite a descrição da vacina" th:errorclass="is-invalid"></textarea>
+				<span class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:each="erro : ${#fields.errors('descricao')}" th:text="${erro} + '. '">Erro</span>
 			</div>
-			<button type="submit" class="btn btn-primary my-2">Enviar</button>
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
 		</form>
 	</main>
 </body>

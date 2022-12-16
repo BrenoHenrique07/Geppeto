@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="atividade")
@@ -25,9 +26,11 @@ public class Atividade implements Serializable{
 	private Long codigo;
 	
 	@Column(name = "nome")
+	@NotBlank(message = "O nome é obrigatório")
 	private String nome;
 	
 	@Column(name = "descricao")
+	@NotBlank(message = "A descrição é obrigatória")
 	private String descricao;
 	
 	@Enumerated(EnumType.STRING)

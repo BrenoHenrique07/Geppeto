@@ -2,9 +2,15 @@ package web.trabalhofinal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +24,9 @@ import web.trabalhofinal.service.AtividadeService;
 @Controller
 @RequestMapping("/atividades")
 public class AtividadeController {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(AtividadeController.class);
+	
 	@Autowired
 	AtividadeService atividadeservice;
 
@@ -31,15 +39,24 @@ public class AtividadeController {
 	}
 	
 	@GetMapping("/abrircadastrar")
-	public String abrircadastrar() {
+	public String abrircadastrar(Atividade atividade) {
 		return "atividade/cadastrar";
 	}
 
 	@PostMapping("/cadastrar")
-	public String cadastrar(Atividade atividade) {
+	public String cadastrar(@Valid Atividade atividade, BindingResult resultado) {
 		
-		atividadeservice.salvar(atividade);
-		return "index.html";
+		if (resultado.hasErrors()) {
+			logger.info("A atividade recebida para cadastrar não é válida.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "atividade/cadastrar";
+		} else {
+			atividadeservice.salvar(atividade);
+			return "index.html";
+		}
 	}
 
 	@GetMapping("/abrirpesquisar")
@@ -65,24 +82,33 @@ public class AtividadeController {
 	}
 
 	@PostMapping("/alterar")
-	public String alterar(Atividade atv) {	
-		atividadeservice.alterar(atv);
-	
-		return "atividade/pesquisar";
+	public String alterar(@Valid Atividade atividade, BindingResult resultado) {
+		
+		if (resultado.hasErrors()) {
+			logger.info("A atividade recebida para cadastrar não é válida.");
+			logger.info("Erros encontrados:");
+			for (FieldError erro : resultado.getFieldErrors()) {
+				logger.info("{}", erro);
+			}
+			return "atividade/alterar";
+		} else {
+			atividadeservice.alterar(atividade);
+			return "atividade/pesquisar";
+		}
 	}
 	
 	@PostMapping("/abrirremover")
-	public String abrirRemover(AtividadeFilter filtro, Model model) {
+	public String abrirRemover(Atividade atividade, Model model) {
 		
-		model.addAttribute("atividade", filtro);
+		model.addAttribute("atividade", atividade);
 		return "atividade/remover";
 	}
 
 	@PostMapping("/remover")
-	public String remover(Atividade filtro) {
+	public String remover(Atividade atividade) {
 		
-		filtro.setStatus(Status.INATIVO);
-		atividadeservice.alterar(filtro);
+		atividade.setStatus(Status.INATIVO);
+		atividadeservice.alterar(atividade);
 		
 		return "atividade/pesquisar";
 	}

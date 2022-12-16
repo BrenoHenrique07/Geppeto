@@ -13,23 +13,25 @@
 </head>
 <body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
-	<main class="mt-5 p-4 pt-5">
-		<h2 class="text-white">Alterar</h2>
+	<main class="container align-center my-5 text-white">
+		<h2>Alterar</h2>
 		<form th:action="@{/atividades/alterar}" method="post" th:object="${atividade}">
 			<div class="mb-3">
-				<label for="nome" class="form-label text-white">
+				<label for="nome" class="form-label">
 					Código:
 					<span th:text="*{codigo}"></span>
 				</label>
 			</div>
 			<input type="hidden" name="codigo" th:value="*{codigo}">
-			<div class="mb-3">
+						<div class="mb-3">
 				<label for="nome" class="form-label">Nome</label>
 				<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina" th:errorclass="is-invalid">
+				<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '">Erro</span>
 			</div>
 			<div class="mb-3">
 				<label for="descricao" class="form-label">Descrição</label>
 				<textarea class="form-control" th:field="*{descricao}" placeholder="Digite a descrição da vacina" th:errorclass="is-invalid"></textarea>
+				<span class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:each="erro : ${#fields.errors('descricao')}" th:text="${erro} + '. '">Erro</span>
 			</div>
 			<button type="submit" class="btn btn-primary">Alterar</button>
 		</form>
