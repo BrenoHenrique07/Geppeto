@@ -11,17 +11,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
 
 	<main class="m-5 p-4">
 		<form th:action="@{/atividades/cadastrar}" method="post" th:object="${atividade}">
 			<div class="form-group">
-				<label for="nome">Nome</label>
+				<label for="nome" class="text-white">Nome</label>
 				<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome da atividade">
 			</div>
 			<div class="form-group">
-				<label for="descricao">Descrição</label>
+				<label for="descricao" class="text-white">Descrição</label>
 				<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descricao da atividade">
 			</div>
 			<button type="submit" class="btn btn-primary my-2">Enviar</button>

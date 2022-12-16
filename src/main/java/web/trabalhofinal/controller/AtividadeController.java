@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.trabalhofinal.model.Atividade;
+import web.trabalhofinal.model.Status;
 import web.trabalhofinal.model.filter.AtividadeFilter;
 import web.trabalhofinal.repository.AtividadeRepository;
 import web.trabalhofinal.service.AtividadeService;
@@ -33,6 +34,18 @@ public class AtividadeController {
 	public String escolher() {
 		return "atividade/escolher";
 	}
+	
+	@GetMapping("/abrircadastrar")
+	public String abrircadastrar() {
+		return "atividade/cadastrar";
+	}
+
+	@PostMapping("/cadastrar")
+	public String cadastrar(Atividade atividade) {
+		atividadeservice.salvar(atividade);
+
+		return "atividade/mostrartodas";
+	}
 
 	@GetMapping("/abrirpesquisar")
 	public String abrirpesquiasr() {
@@ -48,16 +61,32 @@ public class AtividadeController {
 		model.addAttribute("atividades", atvs);
 		return  "atividade/mostrartodas";
 	}
+	
+	@PostMapping("/abriralterar")
+	public String abriralterar() {
 
-	@GetMapping("/abrircadastrar")
-	public String abrircadastrar() {
-		return "atividade/cadastrar";
+		return "atividade/alterar";
 	}
 
-	@PostMapping("/cadastrar")
-	public String cadastrar(Atividade atividade) {
-		atividadeservice.salvar(atividade);
+	@PostMapping("/alterar")
+	public String alterar() {
 
-		return "/index.html";
+		return "index.html";
 	}
+	
+	@PostMapping("/abrirremover")
+	public String abrirRemover(AtividadeFilter filtro, Model model) {
+		
+		model.addAttribute("atividade", filtro);
+		return "atividade/remover";
+	}
+
+	@PostMapping("/remover")
+	public String remover(AtividadeFilter filtro) {
+		
+		atividadeservice.deletar(filtro.getCodigo());
+		
+		return "atividade/pesquisar";
+	}
+
 }

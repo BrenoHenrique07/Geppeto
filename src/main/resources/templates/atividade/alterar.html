@@ -13,19 +13,28 @@
 </head>
 <body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
-
-	<main class="m-5 p-4">
-		<form th:action="@{/atividades/cadastrar}" method="post" th:object="${atividade}">
-			<div class="form-group">
-				<label for="nome" class="text-white">Nome</label>
-				<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome da atividade">
+	
+	<main class="text-white my-5">
+		<h2>Alterar</h2>
+		<form th:action="@{/atividades/abriralterar}" method="post" th:object="${atividade}">
+			<div class="mb-3">
+				<label for="nome" class="form-label">
+					Código:
+					<span th:text="*{codigo}"></span>
+				</label>
 			</div>
-			<div class="form-group">
-				<label for="descricao" class="text-white">Descrição</label>
-				<input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descricao da atividade">
+			<input type="hidden" name="codigo" th:value="*{codigo}">
+			<div class="mb-3">
+				<label for="nome" class="form-label">Nome</label>
+				<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da profissão">
 			</div>
-			<button type="submit" class="btn btn-primary my-2">Enviar</button>
+			<div class="mb-3">
+				<label for="nome" class="form-label">Descrição</label>
+				<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite a descrição da profissão">
+			</div>
+			<button type="submit" class="btn btn-primary">Alterar</button>
 		</form>
 	</main>
+
 </body>
 </html>

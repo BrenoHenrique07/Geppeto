@@ -30,6 +30,11 @@ public class AtividadeService {
 		atividaderepository.save(atividade);
 	}
 	
+	@Transactional
+	public void deletar(Long codigo) {
+		atividaderepository.deleteById(codigo);
+	}
+	
 	public List<Atividade> consultas(AtividadeFilter filtro) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("controleprojetos");
 		EntityManager em = emf.createEntityManager();
@@ -38,12 +43,22 @@ public class AtividadeService {
 
 		if (filtro.getCodigo() != null) {
 			String jpql = "Select c from Atividade c where c.codigo = :cod";
-			atvs = em.createQuery(jpql, Atividade.class).setParameter("cod", filtro.getCodigo()).getResultList();
+			atvs = em.createQuery(jpql, Atividade.class).setParameter("cod", filtro.getCodigo())
+					.setFirstResult(0)
+                    .setMaxResults(10)
+					.getResultList();
 		} else if (!filtro.getNome().isEmpty()) {
 			String jpql = "Select c from Atividade c where c.nome = :cod2";
-			atvs = em.createQuery(jpql, Atividade.class).setParameter("cod2", filtro.getNome()).getResultList();
+			atvs = em.createQuery(jpql, Atividade.class).setParameter("cod2", filtro.getNome())
+					.setFirstResult(0)
+                    .setMaxResults(10)
+					.getResultList();
 		} else {
-			atvs = atividaderepository.findAll();
+			String jpql = "Select c from Atividade c";
+			atvs = em.createQuery(jpql, Atividade.class)
+					.setFirstResult(0)
+                    .setMaxResults(10)
+					.getResultList();
 		}
 		
 		return atvs;

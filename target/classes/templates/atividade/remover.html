@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<title>Geppeto</title>
+<body class="align-center bg-dark">
+
+	<div th:replace="~{layouts/navbar :: navbar}"></div>
+
+	<main class="text-white m-2">
+		<h2>Você tem certeza que quer remover a Atividade:</h2>
+		<div class="mb-3">
+			<label for="codigo" class="form-label">
+				Código:
+				<span th:text="${atividade.codigo}"></span>
+			</label>
+		</div>
+		<div class="mb-3">
+			<label for="nome" class="form-label">
+				Nome:
+				<span th:text="${atividade.nome}"></span>
+			</label>
+		</div>
+		<div class="mb-3">
+			<label for="nome" class="form-label">
+				Descrição:
+				<span th:text="${atividade.descricao}"></span>
+			</label>
+		</div>
+		<form th:action="@{/atividades/remover}" method="post" th:object="${atividade}">
+			<input type="hidden" name="codigo" th:value="*{codigo}">
+			<input type="hidden" name="nome" th:value="*{nome}">
+			<input type="hidden" name="descricao" th:value="*{descricao}">
+			<button type="submit" class="btn btn-danger">Remover</button>
+		</form>
+	</main>
+</body>
+</html>
