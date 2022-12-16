@@ -13,8 +13,9 @@
 </head>
 <body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
-
+	
 	<main class="m-5 p-4">
+		<h2 class="text-white">Cadastrar</h2>
 		<form th:action="@{/atividades/cadastrar}" method="post" th:object="${atividade}">
 			<div class="form-group">
 				<label for="nome" class="text-white">Nome</label>

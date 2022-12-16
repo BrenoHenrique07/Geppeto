@@ -54,7 +54,7 @@ public class AtividadeService {
                     .setMaxResults(10)
 					.getResultList();
 		} else {
-			String jpql = "Select c from Atividade c";
+			String jpql = "Select c from Atividade c where status = 'ATIVO'";
 			atvs = em.createQuery(jpql, Atividade.class)
 					.setFirstResult(0)
                     .setMaxResults(10)

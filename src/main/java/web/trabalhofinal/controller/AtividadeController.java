@@ -1,11 +1,6 @@
 package web.trabalhofinal.controller;
 
-import java.awt.print.Pageable;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,9 +37,9 @@ public class AtividadeController {
 
 	@PostMapping("/cadastrar")
 	public String cadastrar(Atividade atividade) {
+		
 		atividadeservice.salvar(atividade);
-
-		return "atividade/mostrartodas";
+		return "index.html";
 	}
 
 	@GetMapping("/abrirpesquisar")
@@ -57,21 +52,23 @@ public class AtividadeController {
 	public String pesquisar(AtividadeFilter filtro, Model model) {
 		
 		List<Atividade> atvs = atividadeservice.consultas(filtro);
-		
 		model.addAttribute("atividades", atvs);
+		
 		return  "atividade/mostrartodas";
 	}
 	
 	@PostMapping("/abriralterar")
-	public String abriralterar() {
-
+	public String abriralterar(Atividade filtro, Model model) {
+		
+		model.addAttribute("atividade", filtro);
 		return "atividade/alterar";
 	}
 
 	@PostMapping("/alterar")
-	public String alterar() {
-
-		return "index.html";
+	public String alterar(Atividade atv) {	
+		atividadeservice.alterar(atv);
+	
+		return "atividade/pesquisar";
 	}
 	
 	@PostMapping("/abrirremover")
@@ -82,9 +79,10 @@ public class AtividadeController {
 	}
 
 	@PostMapping("/remover")
-	public String remover(AtividadeFilter filtro) {
+	public String remover(Atividade filtro) {
 		
-		atividadeservice.deletar(filtro.getCodigo());
+		filtro.setStatus(Status.INATIVO);
+		atividadeservice.alterar(filtro);
 		
 		return "atividade/pesquisar";
 	}

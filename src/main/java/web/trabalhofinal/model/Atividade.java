@@ -32,9 +32,13 @@ public class Atividade implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
-
+	
 	public Long getCodigo() {
 		return codigo;
+	}
+	
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
