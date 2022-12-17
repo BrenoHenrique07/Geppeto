@@ -14,7 +14,7 @@
 <body class="bg-dark">
 	<div th:replace="~{layouts/navbar :: navbar}"></div>
 	<main class="container align-center my-5 text-white">
-		<h2>Alterar</h2>
+		<h2>Alterar Atividade</h2>
 		<form th:action="@{/atividades/alterar}" method="post" th:object="${atividade}">
 			<div class="mb-3">
 				<label for="nome" class="form-label">

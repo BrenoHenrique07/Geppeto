@@ -1,14 +1,12 @@
 package web.trabalhofinal.model.filter;
 
-import web.trabalhofinal.model.Projeto;
+import web.trabalhofinal.model.Areas;
 
-public class AtividadeFilter {
-	
-
+public class ProjetoFilter {
 	private Long codigo;
 	private String nome;
 	private String descricao;
-	private Projeto projeto;
+	private Areas area;
 
 	public Long getCodigo() {
 		return codigo;
@@ -34,11 +32,11 @@ public class AtividadeFilter {
 		this.descricao = descricao;
 	}
 
-	public Projeto getProjeto() {
-		return projeto;
+	public Areas getArea() {
+		return area;
 	}
 
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
+	public void setArea(Areas area) {
+		this.area = area;
 	}
 }

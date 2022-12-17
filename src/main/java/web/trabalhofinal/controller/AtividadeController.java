@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import web.trabalhofinal.model.Atividade;
+import web.trabalhofinal.model.Projeto;
 import web.trabalhofinal.model.Status;
 import web.trabalhofinal.model.filter.AtividadeFilter;
 import web.trabalhofinal.repository.AtividadeRepository;
+import web.trabalhofinal.repository.ProjetoRepository;
 import web.trabalhofinal.service.AtividadeService;
 
 @Controller
@@ -32,6 +34,9 @@ public class AtividadeController {
 
 	@Autowired
 	AtividadeRepository atividaderepository;
+	
+	@Autowired
+	ProjetoRepository projetorepository;
 
 	@GetMapping("/escolher")
 	public String escolher() {
@@ -39,12 +44,21 @@ public class AtividadeController {
 	}
 	
 	@GetMapping("/abrircadastrar")
-	public String abrircadastrar(Atividade atividade) {
+	public String abrircadastrar(Atividade atividade, Model model) {
+			
+		List<Projeto> projetos = projetorepository.findAll();
+		model.addAttribute("projetos", projetos);
+		
 		return "atividade/cadastrar";
 	}
 
 	@PostMapping("/cadastrar")
-	public String cadastrar(@Valid Atividade atividade, BindingResult resultado) {
+	public String cadastrar(@Valid Atividade atividade, BindingResult resultado, Model model) {
+		
+		
+		List<Projeto> projetos = projetorepository.findAll();
+		model.addAttribute("projetos", projetos);
+		
 		
 		if (resultado.hasErrors()) {
 			logger.info("A atividade recebida para cadastrar não é válida.");

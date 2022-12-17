@@ -10,22 +10,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="atividade")
-public class Atividade implements Serializable{
-	
+@Table(name = "projeto")
+public class Projeto implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "gerador", sequenceName = "atividade_codigo_seq", allocationSize = 1)
-	@GeneratedValue(generator = "gerador", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "gerador1", sequenceName = "projeto_codigo_seq", allocationSize = 1)
+	@GeneratedValue(generator = "gerador1", strategy = GenerationType.SEQUENCE)
 	private Long codigo;
 	
 	@Column(name = "nome")
@@ -36,13 +32,13 @@ public class Atividade implements Serializable{
 	@NotBlank(message = "A descrição é obrigatória")
 	private String descricao;
 	
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
 	
-	@ManyToOne
-	@JoinColumn(name = "codigo_projeto")
-	@NotNull
-	private Projeto projeto;
+	@Column(name = "area")
+	@Enumerated(EnumType.STRING)
+	private Areas area = Areas.ENSINO;
 
 	public Long getCodigo() {
 		return codigo;
@@ -76,17 +72,17 @@ public class Atividade implements Serializable{
 		this.status = status;
 	}
 
-	public Projeto getProjeto() {
-		return projeto;
+	public Areas getArea() {
+		return area;
 	}
 
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
+	public void setArea(Areas area) {
+		this.area = area;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, descricao, nome, projeto, status);
+		return Objects.hash(area, codigo, descricao, nome, status);
 	}
 
 	@Override
@@ -97,14 +93,14 @@ public class Atividade implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Atividade other = (Atividade) obj;
-		return Objects.equals(codigo, other.codigo) && Objects.equals(descricao, other.descricao)
-				&& Objects.equals(nome, other.nome) && Objects.equals(projeto, other.projeto) && status == other.status;
+		Projeto other = (Projeto) obj;
+		return area == other.area && Objects.equals(codigo, other.codigo) && Objects.equals(descricao, other.descricao)
+				&& Objects.equals(nome, other.nome) && status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return "Atividade [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", status=" + status
-				+ ", projeto=" + projeto + "]";
+		return "Projeto [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", status=" + status
+				+ ", area=" + area + "]";
 	}
 }
