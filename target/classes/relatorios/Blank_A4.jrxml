@@ -80,14 +80,14 @@ FROM projeto]]>
 		</band>
 	</title>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="212" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="6" width="100" height="30" uuid="c02a0052-dcee-46a2-b645-69410e434132"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="6" width="100" height="30" uuid="528df67b-8aae-4c55-92fe-ab3a69e19ebf"/>
-				<text><![CDATA[codigo]]></text>
+				<text><![CDATA[Projeto]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="100" y="26" width="100" height="30" uuid="2222a06a-226a-47d1-a91c-16d11873e11e"/>
@@ -113,6 +113,17 @@ FROM projeto]]>
 				<reportElement x="0" y="56" width="100" height="30" uuid="af7de33c-c2d1-49ae-af4e-dcb7700876ce"/>
 				<text><![CDATA[area]]></text>
 			</staticText>
+			<subreport>
+				<reportElement x="0" y="90" width="550" height="90" uuid="c2a7ce62-5265-4917-bdf4-19e0a9602416"/>
+				<subreportParameter name="IDPROJETO">
+					<subreportParameterExpression><![CDATA[$F{codigo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["src/main/resources/relatorios/teste.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="210" width="551" height="1" uuid="7cc620c8-6ffe-4180-b61b-def4997eb68e"/>
+			</line>
 		</band>
 	</detail>
 	<pageFooter>

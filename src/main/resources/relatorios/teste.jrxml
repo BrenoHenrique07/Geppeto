@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="975a2fc1-61c1-452f-86c7-ab31df721f76">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Base local"/>
+	<parameter name="IDPROJETO" class="java.lang.Long"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT codigo,
+	nome,
+	descricao,
+	status,
+	codigo_projeto
+FROM atividade WHERE codigo_projeto =  $P{IDPROJETO}]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atividade"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atividade"/>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atividade"/>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atividade"/>
+	</field>
+	<field name="codigo_projeto" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="codigo_projeto"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo_projeto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="atividade"/>
+	</field>
+	<group name="codigo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+	</group>
+	<group name="nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+	</group>
+	<group name="descricao">
+		<groupExpression><![CDATA[$F{descricao}]]></groupExpression>
+	</group>
+	<group name="status">
+		<groupExpression><![CDATA[$F{status}]]></groupExpression>
+	</group>
+	<group name="codigo_projeto">
+		<groupExpression><![CDATA[$F{codigo_projeto}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="100" y="30" width="100" height="30" uuid="c3b22476-5b11-4333-9ae2-b91436b445a4"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="30" uuid="d324e72e-ec46-4555-95de-46c323012460"/>
+				<text><![CDATA[codigo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="60" width="100" height="30" uuid="80e2ccd9-e04d-4b3c-ba80-f328b97de9cc"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="78d77fa4-912b-447d-b087-9a73427bf81b"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="80" width="100" height="30" uuid="f67f9f0e-a92e-494f-b154-62bc2286a001"/>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="100" height="30" uuid="fd7ec9ca-1f1c-4b2e-8cf8-c5ed4616a6e8"/>
+				<text><![CDATA[descricao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="62cd0dd3-1c38-4413-9adf-d3fb2a97b539"/>
+				<text><![CDATA[Atividades]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
