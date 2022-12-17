@@ -28,8 +28,8 @@
 				<td th:text="${v.descricao}"></td>
 				<td th:text="${v.projeto.nome}"></td>
 				<td th:text="${v.status}"></td>
-				<td>
-					<form th:action="@{/atividades/abriralterar}" method="post">
+				<td sec:authorize="hasRole('ROLE_ADMIN')">
+					<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{/atividades/abriralterar}" method="post">
 						<input type="hidden" name="codigo" th:value="${v.codigo}">
 						<input type="hidden" name="nome" th:value="${v.nome}">
 						<input type="hidden" name="descricao" th:value="${v.descricao}">
@@ -40,7 +40,7 @@
 						</button>
 					</form>
 				</td>
-				<td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')">
 					<form th:action="@{/atividades/abrirremover}" method="post">
 						<input type="hidden" name="codigo" th:value="${v.codigo}">
 						<input type="hidden" name="nome" th:value="${v.nome}">

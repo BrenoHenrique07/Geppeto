@@ -13,9 +13,11 @@
 			<!-- titulo da aplicacao -->
 			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/index.html}">Geppeto</a>
 
-			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/projetos/escolher}">Projetos</a>
+			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/projetos/escolher}" 
+				sec:authorize="isAuthenticated()">Projetos</a>
 
-			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/atividades/escolher}">Atividades</a>
+			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/atividades/escolher}" 
+				sec:authorize="isAuthenticated()">Atividades</a>
 
 			<!-- parte da direita -->
 			<div class="d-flex justify-content-end align-items-center">
@@ -46,6 +48,7 @@
 				</div>
 
 			</div>
+
 		</div>
 	</nav>
 	<!-- !navbar -->
