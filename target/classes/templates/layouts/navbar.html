@@ -13,11 +13,11 @@
 			<!-- titulo da aplicacao -->
 			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/index.html}">Geppeto</a>
 
-			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/projetos/escolher}" 
-				sec:authorize="isAuthenticated()">Projetos</a>
+			<a class="navbar-brand me-auto" th:href="@{/projetos/escolher}" sec:authorize="isAuthenticated()">Projetos</a>
 
-			<a class="navbar-brand fw-bold text-uppercase me-auto" th:href="@{/atividades/escolher}" 
-				sec:authorize="isAuthenticated()">Atividades</a>
+			<a class="navbar-brand me-auto" th:href="@{/atividades/escolher}" sec:authorize="isAuthenticated()">Atividades</a>
+
+			<a class="navbar-brand me-auto" th:href="@{/relatorios/todaspessoassimples}" sec:authorize="hasRole('ROLE_ADMIN')">Relatórios</a>
 
 			<!-- parte da direita -->
 			<div class="d-flex justify-content-end align-items-center">

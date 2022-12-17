@@ -73,7 +73,7 @@ public class ApplicationLoggingAspect {
 		Object result = joinPoint.proceed();
 		String nomeDaView = getViewName(result);
 		
-		if (nomeDaView.startsWith("redirect:")) {
+		if (nomeDaView != null && nomeDaView.startsWith("redirect:")) {
 			logger.trace("Redirecionando para a URL: {}", nomeDaView.substring(9));
 		} else {
 			logger.trace("Encaminhando para a view: {}", nomeDaView);
@@ -130,6 +130,8 @@ public class ApplicationLoggingAspect {
 		}
 		return nomeDaView;
 	}
+	
+	
 
 }
 
