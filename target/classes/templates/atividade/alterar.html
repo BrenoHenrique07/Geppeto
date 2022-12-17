@@ -23,17 +23,26 @@
 				</label>
 			</div>
 			<input type="hidden" name="codigo" th:value="*{codigo}">
-						<div class="mb-3">
-				<label for="nome" class="form-label">Nome</label>
-				<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina" th:errorclass="is-invalid">
-				<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '">Erro</span>
-			</div>
 			<div class="mb-3">
-				<label for="descricao" class="form-label">Descrição</label>
-				<textarea class="form-control" th:field="*{descricao}" placeholder="Digite a descrição da vacina" th:errorclass="is-invalid"></textarea>
-				<span class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:each="erro : ${#fields.errors('descricao')}" th:text="${erro} + '. '">Erro</span>
-			</div>
-			<button type="submit" class="btn btn-primary">Alterar</button>
+				<div class="mb-3">
+					<label for="nome" class="form-label">Nome</label>
+					<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da vacina" th:errorclass="is-invalid">
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:each="erro : ${#fields.errors('nome')}" th:text="${erro} + '. '">Erro</span>
+				</div>
+				<div class="mb-3">
+					<label for="descricao" class="form-label">Descrição</label>
+					<textarea class="form-control" th:field="*{descricao}" placeholder="Digite a descrição da vacina" th:errorclass="is-invalid"></textarea>
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:each="erro : ${#fields.errors('descricao')}" th:text="${erro} + '. '">Erro</span>
+				</div>
+				<div class="mb-3">
+					<label for="projeto" class="form-label">Projeto</label>
+					<select class="form-select" id="projetos" name="projeto" th:errorclass="is-invalid">
+						<option th:each="p : ${projetos}" th:value="${p.codigo}" th:text="${p.nome}" th:selected="${p.codigo} == ${atividade.projeto?.codigo}"></option>
+					</select>
+					<span class="invalid-feedback" th:if="${#fields.hasErrors('projeto')}" th:each="erro : ${#fields.errors('projeto')}" th:text="${erro} + '. '"></span>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Alterar</button>
 		</form>
 	</main>
 

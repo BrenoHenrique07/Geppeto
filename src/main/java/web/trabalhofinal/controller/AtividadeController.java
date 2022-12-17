@@ -26,15 +26,15 @@ import web.trabalhofinal.service.AtividadeService;
 @Controller
 @RequestMapping("/atividades")
 public class AtividadeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(AtividadeController.class);
-	
+
 	@Autowired
 	AtividadeService atividadeservice;
 
 	@Autowired
 	AtividadeRepository atividaderepository;
-	
+
 	@Autowired
 	ProjetoRepository projetorepository;
 
@@ -42,24 +42,22 @@ public class AtividadeController {
 	public String escolher() {
 		return "atividade/escolher";
 	}
-	
+
 	@GetMapping("/abrircadastrar")
 	public String abrircadastrar(Atividade atividade, Model model) {
-			
+
 		List<Projeto> projetos = projetorepository.findAll();
 		model.addAttribute("projetos", projetos);
-		
+
 		return "atividade/cadastrar";
 	}
 
 	@PostMapping("/cadastrar")
 	public String cadastrar(@Valid Atividade atividade, BindingResult resultado, Model model) {
-		
-		
+
 		List<Projeto> projetos = projetorepository.findAll();
 		model.addAttribute("projetos", projetos);
-		
-		
+
 		if (resultado.hasErrors()) {
 			logger.info("A atividade recebida para cadastrar não é válida.");
 			logger.info("Erros encontrados:");
@@ -69,7 +67,7 @@ public class AtividadeController {
 			return "atividade/cadastrar";
 		} else {
 			atividadeservice.salvar(atividade);
-			return "index.html";
+			return "atividade/pesquisar";
 		}
 	}
 
@@ -81,22 +79,28 @@ public class AtividadeController {
 
 	@GetMapping("/pesquisar")
 	public String pesquisar(AtividadeFilter filtro, Model model) {
-		
+
 		List<Atividade> atvs = atividadeservice.consultas(filtro);
 		model.addAttribute("atividades", atvs);
-		
-		return  "atividade/mostrartodas";
+
+		return "atividade/mostrartodas";
+
 	}
-	
+
 	@PostMapping("/abriralterar")
 	public String abriralterar(Atividade filtro, Model model) {
+
+		List<Projeto> projetos = projetorepository.findAll();
+		model.addAttribute("projetos", projetos);
 		
-		model.addAttribute("atividade", filtro);
 		return "atividade/alterar";
 	}
 
 	@PostMapping("/alterar")
-	public String alterar(@Valid Atividade atividade, BindingResult resultado) {
+	public String alterar(@Valid Atividade atividade, BindingResult resultado, Model model) {
+		
+		List<Projeto> projetos = projetorepository.findAll();
+		model.addAttribute("projetos", projetos);
 		
 		if (resultado.hasErrors()) {
 			logger.info("A atividade recebida para cadastrar não é válida.");
@@ -110,20 +114,20 @@ public class AtividadeController {
 			return "atividade/pesquisar";
 		}
 	}
-	
+
 	@PostMapping("/abrirremover")
 	public String abrirRemover(Atividade atividade, Model model) {
-		
+
 		model.addAttribute("atividade", atividade);
 		return "atividade/remover";
 	}
 
 	@PostMapping("/remover")
 	public String remover(Atividade atividade) {
-		
+
 		atividade.setStatus(Status.INATIVO);
 		atividadeservice.alterar(atividade);
-		
+
 		return "atividade/pesquisar";
 	}
 
